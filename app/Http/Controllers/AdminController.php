@@ -22,7 +22,7 @@ class AdminController extends Controller
     }
 
 
-    public function destroy(Request $request)
+    public function AdminDestroy(Request $request)
     {
         Auth::guard('web')->logout();
 
@@ -35,9 +35,9 @@ class AdminController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect('/login')->with($notification);
+        return redirect('/admin/login')->with($notification);
     }
-    public function profile()
+    public function AdminProfile()
     {
         $id = Auth::user()->id;
         $adminData = User::find($id);

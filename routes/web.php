@@ -41,14 +41,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
 });
 
-
-
+Route::get('/admin/login', [AdminController::class, 'AdminLogin']); // edit later
 
 
 //adminroute
 Route::controller(AdminController::class)->group(function () {
-    Route::get('/admin/logout', 'destroy')->name('admin.logout');
-    Route::get('/admin/profile', 'profile')->name('admin.profile');
+    Route::get('/admin/logout', 'AdminDestroy')->name('admin.logout');
+    Route::get('/admin/profile', 'AdminProfile')->name('admin.profile');
     Route::get('/edit/profile', 'EditProfile')->name('edit.profile');
     Route::post('/store/profile', 'StoreProfile')->name('store.profile');
     Route::get('/change/password', 'ChangePassword')->name('change.password');
