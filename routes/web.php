@@ -48,10 +48,10 @@ Route::get('/admin/login', [AdminController::class, 'AdminLogin']); // edit late
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/logout', 'AdminDestroy')->name('admin.logout');
     Route::get('/admin/profile', 'AdminProfile')->name('admin.profile');
-    Route::get('/edit/profile', 'EditProfile')->name('edit.profile');
-    Route::post('/store/profile', 'StoreProfile')->name('store.profile');
-    Route::get('/change/password', 'ChangePassword')->name('change.password');
-    Route::post('/update/password', 'UpdatePassword')->name('update.password');
+    Route::get('admin/profile/edit', 'AdminEditProfile')->name('admin.edit.profile');
+    Route::get('/admin/profile/changepassword', 'AdminChangePassword')->name('admin.change.password');
+    Route::post('/store/profile', 'AdminProfileStore')->name('admin.profile.store');
+    Route::post('/admin/updatepassword', 'AdminUpdatePassword')->name('admin.update.password');
 });
 
 // Home Slide All Route 
