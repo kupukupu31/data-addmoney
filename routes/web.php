@@ -40,17 +40,17 @@ Route::get('/', [IndexController::class, 'Index']);
 
 //     Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
 // });
+//END GUESTS                               
+
 
 //////////////////////////////////////////////////////////////////
-//END GUESTS                               
+// USER ROUTES //                             
 //////////////////////////////////////////////////////////////////////-->
-
-//Users
 Route::middleware(['auth', 'role:user'])->group(function () {
 
-    Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard'); //user dashboard
+    Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard'); //user dashboard
 
-    Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
+    Route::get('/user/logout', [UserController::class, 'UserDestroy'])->name('user.logout');
 
     Route::get('/user/profile', [UserController::class, 'UserProfile'])->name('user.profile');
 
@@ -61,6 +61,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
 });
 require __DIR__ . '/auth.php';
+// END USERS //  
 
 //Admin
 Route::middleware(['auth', 'role:admin'])->group(function () {

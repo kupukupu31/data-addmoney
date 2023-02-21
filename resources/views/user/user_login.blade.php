@@ -4,10 +4,10 @@
     <head>
         
         <meta charset="utf-8" />
-        <title>Login | Admin </title>
+        <title>Login | User </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-        <meta content="Themesdesign" name="author" />
+        <meta content="M30 Multipurpose Dashboard System" name="description" />
+        <meta content="M30 Designs" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{asset('backend/assets/images/favicon.ico')}}">
 
@@ -41,7 +41,7 @@
                         <h4 class="text-muted text-center font-size-18"><b>User Sign In</b></h4>
     
                         <div class="p-3">
-<form class="form-horizontal mt-3" method="POST" action="{{ route('user.login') }}">
+<form class="form-horizontal mt-3" method="POST" action="{{ route('login') }}">
 @csrf
  <!-- username -->
 <div class="form-group mb-3 row">

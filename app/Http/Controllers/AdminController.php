@@ -13,17 +13,16 @@ use Illuminate\Support\Facades\Notification;
 
 class AdminController extends Controller
 {
-    public function AdminDashboard()
-    {
-
-        return view('admin.index');
-    }
-
     public function AdminLogin()
     {
         return view('admin.admin_login');
     }
 
+    public function AdminDashboard()
+    {
+
+        return view('admin.index');
+    }
 
     public function AdminDestroy(Request $request)
     {

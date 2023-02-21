@@ -1,5 +1,5 @@
 @extends('user.user_dashboard')
-@section('investor')
+@section('user')
 <div class="page-content">
     <div class="container-fluid">
         

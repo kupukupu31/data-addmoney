@@ -14,6 +14,7 @@ class AuthenticatedSessionController extends Controller
 {
     /**
      * Display the login view.
+     * @return \Illuminate\View\View
      */
     public function create(): View
     {
@@ -30,7 +31,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $notification = array(
-            'message' => 'User Login Successfully',
+            'message' => 'Logged in Successfully',
             'alert-type' => 'success'
         );
 
@@ -39,7 +40,10 @@ class AuthenticatedSessionController extends Controller
             $url = 'admin/dashboard';
         } elseif ($request->user()->role === 'user') {
             $url = 'user/dashboard';
+        } elseif ($request->user()->role === 'guest') {
+            $url = '/dashboard';
         }
+
         return redirect()->intended($url)->with($notification);
     }
 
