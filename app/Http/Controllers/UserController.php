@@ -7,8 +7,13 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function UserLogin()
+    {
+        return view('user.user_login');
+    }
+
     public function UserDashboard()
     {
-        return view('user_dashboard');
+        return view('user.user_dashboard');
     }
 }

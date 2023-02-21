@@ -5,9 +5,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Home\TestingController;
 use App\Http\Controllers\Home\HomeSliderController;
-
+use App\Http\Middleware\RedirectIfAuthenticated;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,40 +18,75 @@ use App\Http\Controllers\Home\HomeSliderController;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
+// Route::get('/', function () {
+//     return view('frontend.index');
+// });
 
 //Show Login Page - edit later
-Route::get('/login', function () {
-    return view('auth.login');
-});
+// Route::get('/', function () {
+//     return view('auth.login');
+// });1
 
+//Guests
 Route::get('/', [IndexController::class, 'Index']);
 
-//User Role
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
+
+//     Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard');
+
+//     Route::post('/user/profile/store', [UserController::class, 'UserProfileStore'])->name('user.profile.store');
+
+//     Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
+
+//     Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
+// });
+
+//////////////////////////////////////////////////////////////////
+//END GUESTS                               
+//////////////////////////////////////////////////////////////////////-->
+
+//Users
+Route::middleware(['auth', 'role:user'])->group(function () {
+
     Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard'); //user dashboard
+
+    Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
+
+    Route::get('/user/profile', [UserController::class, 'UserProfile'])->name('user.profile');
+
+    Route::post('/user/profile/store', [UserController::class, 'UserProfileStore'])->name('user.profile.store');
+
+    Route::get('/user/change/password', [UserController::class, 'UserChangePassword'])->name('user.change.password');
+
+    Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
 });
+require __DIR__ . '/auth.php';
 
-
-//Admin Role
+//Admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
+
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+
+    Route::get('/admin/logout', [AdminController::class, 'AdminDestroy'])->name('admin.logout');
+
+    Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
+
+    // Route::get('admin/profile/edit', [AdminController::class, 'AdminEditProfile'])->name('admin.edit.profile'); // TO DELETE
+
+    Route::get('/admin/profile/changepassword', [AdminController::class, 'AdminChangePassword'])->name('admin.change.password');
+
+    Route::post('/store/profile', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
+
+    Route::post('/admin/updatepassword', [AdminController::class, 'AdminUpdatePassword'])->name('admin.update.password');
 });
 
-Route::get('/admin/login', [AdminController::class, 'AdminLogin']); // edit later
 
+Route::get('/admin/login', [AdminController::class, 'AdminLogin']);
 
-//adminroute
-Route::controller(AdminController::class)->group(function () {
-    Route::get('/admin/logout', 'AdminDestroy')->name('admin.logout');
-    Route::get('/admin/profile', 'AdminProfile')->name('admin.profile');
-    Route::get('admin/profile/edit', 'AdminEditProfile')->name('admin.edit.profile');
-    Route::get('/admin/profile/changepassword', 'AdminChangePassword')->name('admin.change.password');
-    Route::post('/store/profile', 'AdminProfileStore')->name('admin.profile.store');
-    Route::post('/admin/updatepassword', 'AdminUpdatePassword')->name('admin.update.password');
-});
+Route::get('/user/login', [UserController::class, 'UserLogin'])->name('user.login');
+
+// Route::post('/user/register', [UserController::class, 'UserRegister'])->name('user.register');
+// Route::get('/user/login', [UserController::class, 'UserLogin'])->name('user.login');
 
 // Home Slide All Route 
 Route::controller(HomeSliderController::class)->group(function () {
@@ -64,5 +98,3 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-require __DIR__ . '/auth.php';
