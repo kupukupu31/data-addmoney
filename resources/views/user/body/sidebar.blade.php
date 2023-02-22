@@ -20,7 +20,7 @@
                 <li class="menu-title">Menu</li>
 
                 <li>
-                    <a href="{{ route('user.dashboard') }}" class="waves-effect">
+                    <a href="/user/dashboard" class="waves-effect">
                         <i class="ri-dashboard-line"></i><span class="badge rounded-pill bg-success float-end"></span>
                         <span>Dashboard</span>
                     </a>
@@ -30,6 +30,13 @@
                     <a href="#" class=" waves-effect">
                         <i class="ri-calendar-2-line"></i>
                         <span>Transactions</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class=" waves-effect">
+                        <i class="ri-calendar-2-line"></i>
+                        <span>Add Money</span>
                     </a>
                 </li>
 

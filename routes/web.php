@@ -3,10 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Home\HomeSliderController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Home\HomeSliderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,7 +49,11 @@ Route::get('/', [IndexController::class, 'Index']);
 //////////////////////////////////////////////////////////////////////-->
 Route::middleware(['auth', 'role:user'])->group(function () {
 
-    Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard'); //user dashboard
+    // Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard'); //user dashboard
+    Route::get('/user/dashboard', [UserController::class, 'transanctions'])->name('transanctions');
+    // Route::get('/user/dashboard', [TransactionController::class, 'transanctions'])->name('transanctions');
+    Route::get('/user/addmoney', [UserController::class, 'create']); //Addmoney
+    Route::post('/user/addmoney', [UserController::class, 'store']);
 
     Route::get('/user/logout', [UserController::class, 'UserDestroy'])->name('user.logout');
 
@@ -59,7 +64,12 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/user/change/password', [UserController::class, 'UserChangePassword'])->name('user.change.password');
 
     Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
+
+  
 });
+
+
+
 require __DIR__ . '/auth.php';
 // END USERS //  
 
