@@ -33,6 +33,13 @@
                     </a>
                 </li>
 
+                <li @if( Route::currentRouteName() != 'user.deposit.log') {{ isActive('user.deposit*') }} @endif">>
+                    <a href="{{ route('user.deposit.amount') }}" class=" waves-effect">
+                        <i class="ri-calendar-2-line"></i>
+                        <span>Invest</span> <!-- Add Money -->
+                    </a>
+                </li>
+
                 <li>
                     <a href="javascript: void(0);" class="waves-effect">
                         <i class="ri-layout-3-line"></i>

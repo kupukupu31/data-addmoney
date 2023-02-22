@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Frontend\DepositController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Home\HomeSliderController;
@@ -59,6 +60,14 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/user/change/password', [UserController::class, 'UserChangePassword'])->name('user.change.password');
 
     Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
+
+    //Deposit Group 'Add Money'
+    Route::group(['prefix' => 'deposit', 'as' => 'deposit.'], function () {
+        Route::get('', [DepositController::class, 'deposit'])->name('amount');
+        // Route::get('/user/deposit', [DepositController::class, 'depositNow'])->name('amount');
+
+        Route::get('log', [DepositController::class, 'depositLog'])->name('log');
+    });
 });
 require __DIR__ . '/auth.php';
 // END USERS //  
