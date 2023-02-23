@@ -110,7 +110,7 @@
                         <div class="card-body">
                             <h3 class="card-title">Add Investment</h3>
                             <p class="card-title-desc"></p> <!-- description here-->
-                            <form action="{{ route('user.deposit.now') }}" method="POST" class="needs-validation"
+                            <form action="/user/invest" method="POST" class="needs-validation"
                                 novalidate>
                                 @csrf
                                 <div class="row">
@@ -124,8 +124,8 @@
                                                 <option value="BPI">BPI</option>
                                             </select>
                                             @error('method')
-                                                <p class="text-red-500 text-xs mt-2">
-                                                    invalid
+                                                <p class="text-danger text-xs mt-2">
+                                                    {{ $message }}
                                                 </p>
                                             @enderror
                                             <div class="invalid-feedback">
@@ -139,10 +139,10 @@
                                             <label for="invest_amount" class="form-label">Amount</label>
                                             <input type="number" name="invest_amount" min="5000" step="1"
                                                 max="50000" value="5000" class="form-control"
-                                                value={{ old('invest_amount') }} id="validationCustom04" placeholder="0"
+                                                value={{ old('invest_amount') }} id="" placeholder="0"
                                                 required>
                                             @error('invest_amount')
-                                                <p class="text-red-500 text-xs mt-2">
+                                                <p class="text-danger text-xs mt-2">
                                                     {{ $message }}
                                                 </p>
                                             @enderror
@@ -169,7 +169,7 @@
 
                                 </div>
                                 <div>
-                                    <button class="btn btn-primary" type="submit">Proceed Payment</button>
+                                    <button class="btn btn-primary" type="sumbit">Proceed Payment</button>
                                 </div>
                             </form>
                         </div>
@@ -178,4 +178,8 @@
                 </div> <!-- end col -->
             </div>
         </div>
+      
     @endsection
+
+ 
+   

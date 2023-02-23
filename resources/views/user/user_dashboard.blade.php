@@ -156,7 +156,7 @@
         <script src="{{ asset('backend/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
         <script src="{{ asset('backend/assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js') }}"></script>
         
-        
+       
 
         
         <script src="{{ asset('backend/assets/js/pages/dashboard.init.js') }}"></script>
@@ -167,6 +167,8 @@
         <!-- App js -->
         <script src="{{ asset('backend/assets/js/app.js') }}"></script>
         {{-- {{ asset('backend/')}} --}}
+
+        @yield('scripts')
     </body>
     
     </html>

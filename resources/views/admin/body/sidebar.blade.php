@@ -5,7 +5,8 @@
         <!-- User details -->
         <div class="user-profile text-center mt-3">
             <div class="">
-                <img src="{{ asset('/backend/assets/images/logo-dark.png') }}" alt="logo icon" class="avatar-md rounded-circle">
+                <img class="rounded-circle header-profile-user" src="{{ (!empty($adminData->photo)) ? url('upload/admin_images/'.$adminData->photo):url('upload/no_image.jpg') }}"
+                alt="Header Avatar">
             </div>
             <div class="mt-3">
                 <h4 class="font-size-16 mb-1">Admin</h4><!-- Edit later -->

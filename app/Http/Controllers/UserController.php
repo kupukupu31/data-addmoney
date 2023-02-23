@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,58 @@ class UserController extends Controller
         return view('user.user_login');
     }
 
-    public function UserDashboard()
+    // public function UserDashboard()
+    // {
+    //     return view('user.index');
+    // }
+
+    /* Datatable */
+    public function transanctions()
     {
-        return view('user.index');
+        // return view('transanctions');
+        $transactdata = Transaction::All();
+        $users = User::count();
+        $transanctions = Transaction::count();
+        $amount = Transaction::sum('invest_amount');
+        return view('user.index', compact('transactdata', 'users', 'transanctions', 'amount'));
+    }
+
+    // public function statistics()
+    // {
+    //     // return view('transanctions');
+    //     $users = User::count();
+    //     return view('user.index', compact('users'));
+    // }
+
+    /* Add MONEY */
+
+    public function create() {
+        return view('user.deposit.index');
+    }
+ 
+ 
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            // "name" => ['required'],
+            "method" => ['required'],
+            "invest_amount" => ['required'],
+            
+        ]);
+    
+        $validated['type'] = 'Deposit';
+        $validated['user_id'] = auth()->id();
+     //    $validated['description'] = transanction()->Method();
+    
+
+ 
+        Transaction::create($validated);
+        
+
+        return back()->with("status", " Password Changed Successfully");
+        // return back();
+        // return redirect('user.index');
+        // return view('user.deposit.index');
     }
 
     public function UserDestroy(Request $request)
@@ -76,6 +126,7 @@ class UserController extends Controller
             'message' => 'User Profile Updated Successfully',
             'alert-type' => 'success'
         );
+        
 
         return redirect()->back()->with($notification);
     } // End Method

@@ -49,7 +49,11 @@ Route::get('/', [IndexController::class, 'Index']);
 //////////////////////////////////////////////////////////////////////-->
 Route::middleware(['auth', 'role:user'])->group(function () {
 
-    Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard'); //user dashboard
+    // Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard'); //user dashboard
+    Route::get('/user/dashboard', [UserController::class, 'transanctions'])->name('transanctions');
+    // Route::get('/user/dashboard', [UserController::class, 'statistics'])->name('statistics');
+    Route::get('/user/invest/', [UserController::class, 'create']); //Addmoney
+    Route::post('/user/invest', [UserController::class, 'store']);
 
     Route::get('/user/logout', [UserController::class, 'UserDestroy'])->name('user.logout');
 
