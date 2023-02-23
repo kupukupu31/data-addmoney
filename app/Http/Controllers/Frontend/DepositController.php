@@ -11,7 +11,7 @@ class DepositController extends Controller
 
     public function deposit()
     {
-        return view('user.deposit.index');
+        return view('frontend.deposit.now');
     }
 
     public function depositNow(Request $request)

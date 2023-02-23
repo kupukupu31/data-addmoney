@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Frontend\TransactionController;
+use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\DepositController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Home\HomeSliderController;
-use App\Http\Controllers\TransactionController;
+// use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 /*
 |--------------------------------------------------------------------------
@@ -48,9 +50,13 @@ Route::get('/', [IndexController::class, 'Index']);
 //////////////////////////////////////////////////////////////////
 // USER ROUTES //                             
 //////////////////////////////////////////////////////////////////////-->
+Route::group(['middleware' => ['auth', 'role:user'], 'prefix' => 'user', 'as' => 'user.'], function () {
+    Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard'); //user dashboard
+});
+
 Route::middleware(['auth', 'role:user'])->group(function () {
 
-    Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard'); //user dashboard
+    // Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard'); //user dashboard
 
     Route::get('/user/logout', [UserController::class, 'UserDestroy'])->name('user.logout');
 
