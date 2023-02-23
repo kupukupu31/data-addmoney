@@ -62,11 +62,15 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
 
     //Deposit Group 'Add Money'
-    Route::group(['prefix' => 'deposit', 'as' => 'deposit.'], function () {
-        Route::get('', [DepositController::class, 'deposit'])->name('amount');
-        // Route::get('/user/deposit', [DepositController::class, 'depositNow'])->name('amount');
+    Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+        Route::group(['prefix' => 'deposit', 'as' => 'deposit.'], function () {
 
-        Route::get('log', [DepositController::class, 'depositLog'])->name('log');
+            Route::get('', [DepositController::class, 'deposit'])->name('amount');
+
+            Route::post('now', [DepositController::class, 'depositNow'])->name('now');
+
+            Route::get('log', [DepositController::class, 'depositLog'])->name('log');
+        });
     });
 });
 require __DIR__ . '/auth.php';
