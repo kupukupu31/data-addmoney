@@ -14,6 +14,11 @@ class DepositController extends Controller
         return view('frontend.deposit.now');
     }
 
+    public function depositLog()
+    {
+        return view('user.log');
+    }
+
     public function depositNow(Request $request)
     {
 
@@ -37,10 +42,5 @@ class DepositController extends Controller
         // ]));
 
         return redirect('user.deposit.index');
-    }
-
-    public function depositLog()
-    {
-        return view('user.deposit.log');
     }
 }

@@ -51,11 +51,19 @@ Route::get('/', [IndexController::class, 'Index']);
 // USER ROUTES //                             
 //////////////////////////////////////////////////////////////////////-->
 Route::group(['middleware' => ['auth', 'role:user'], 'prefix' => 'user', 'as' => 'user.'], function () {
+
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard'); //user dashboard
+
+    Route::group(['prefix' => 'deposit', 'as' => 'deposit.'], function () {
+
+        Route::get('', [DepositController::class, 'deposit'])->name('amount');
+
+        Route::post('now', [DepositController::class, 'depositNow'])->name('now');
+    });
 });
 
 Route::middleware(['auth', 'role:user'])->group(function () {
-
+    Route::get('user/deposit-log', [DepositController::class, 'depositLog'])->name('log');
     // Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard'); //user dashboard
 
     Route::get('/user/logout', [UserController::class, 'UserDestroy'])->name('user.logout');
@@ -72,14 +80,6 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
         //deposit
-        Route::group(['prefix' => 'deposit', 'as' => 'deposit.'], function () {
-
-            Route::get('', [DepositController::class, 'deposit'])->name('amount');
-
-            Route::post('now', [DepositController::class, 'depositNow'])->name('now');
-
-            Route::get('log', [DepositController::class, 'depositLog'])->name('log');
-        });
 
         //transactions
         Route::get('transactions', [TransactionController::class, 'transactions'])->name('transactions');
