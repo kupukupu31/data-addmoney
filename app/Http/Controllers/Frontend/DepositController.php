@@ -36,8 +36,11 @@ class DepositController extends Controller
         //     'user_id' => auth()->id(),
         // ]));
 
-
-
         return redirect('user.deposit.index');
+    }
+
+    public function depositLog()
+    {
+        return view('user.deposit.log');
     }
 }

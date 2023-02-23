@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\DepositController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Home\HomeSliderController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
     //Deposit Group 'Add Money'
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+
+        //deposit
         Route::group(['prefix' => 'deposit', 'as' => 'deposit.'], function () {
 
             Route::get('', [DepositController::class, 'deposit'])->name('amount');
@@ -71,6 +74,9 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
             Route::get('log', [DepositController::class, 'depositLog'])->name('log');
         });
+
+        //transactions
+        Route::get('transactions', [TransactionController::class, 'transactions'])->name('transactions');
     });
 });
 require __DIR__ . '/auth.php';
