@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
+
 // to add others later..
 
 class UserController extends Controller
@@ -60,14 +62,14 @@ class UserController extends Controller
         $validated['user_id'] = auth()->id();
      //    $validated['description'] = transanction()->Method();
     
-
+    Alert::success('Deposit Successfully', 'Added to Transanctions Log');
  
         Transaction::create($validated);
         
 
-        return back()->with("status", " Password Changed Successfully");
+        // return back()->with("status", " Password Changed Successfully");
         // return back();
-        // return redirect('user.index');
+        return redirect()->back();
         // return view('user.deposit.index');
     }
 
