@@ -20,8 +20,8 @@
                                         <option value="bpi">BPI</option>
                                     </select>
                                     @error('method')
-                                        <p class="text-red-500 text-xs mt-2">
-                                            invalid
+                                        <p class="text-danger text-xs mt-2">
+                                            {{ $message }}
                                         </p>
                                     @enderror
                                     <div class="invalid-feedback">

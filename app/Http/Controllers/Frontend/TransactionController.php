@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TransactionController extends Controller
 {
     public function transactions()
     {
-        return view('frontend.user.transaction.index');
+        $transactdata = Transaction::All();
+        return view('frontend.user.transaction.index', compact('transactdata'));
     }
 }

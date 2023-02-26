@@ -16,7 +16,8 @@ class DepositController extends Controller
 
     public function depositLog()
     {
-        return view('user.log');
+        $transactdata = Transaction::All();
+        return view('user.log', compact('transactdata'));
     }
 
     public function depositNow(Request $request)
@@ -41,6 +42,11 @@ class DepositController extends Controller
         //     'user_id' => auth()->id(),
         // ]));
 
-        return redirect('user.deposit.index');
+         // Alert::success('Deposit Successfully', 'Added to Transanctions Log');
+    // alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.')->showConfirmButton('Confirm', '#3085d6');
+    // example:
+alert()->success('Deposit Successfully','Added to Transanctions Log.')->persistent(true,false);
+
+        return redirect()->back();
     }
 }
