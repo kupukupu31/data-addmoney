@@ -62,8 +62,12 @@ class UserController extends Controller
         $validated['user_id'] = auth()->id();
      //    $validated['description'] = transanction()->Method();
     
-    Alert::success('Deposit Successfully', 'Added to Transanctions Log');
- 
+    // Alert::success('Deposit Successfully', 'Added to Transanctions Log');
+    // alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.')->showConfirmButton('Confirm', '#3085d6');
+    // example:
+alert()->success('Deposit Successfully','Added to Transanctions Log.')->persistent(true,false);
+
+    
         Transaction::create($validated);
         
 
